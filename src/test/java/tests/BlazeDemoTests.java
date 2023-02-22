@@ -1,17 +1,19 @@
 package tests;
 
-import pages.BlazeDemoDestWeek;
-import pages.BlazeDemoFlightsPage;
-import pages.BlazeDemoHomePage;
+import org.testng.asserts.SoftAssert;
+import pages.blazedemopages.BlazeDemoDestWeek;
+import pages.blazedemopages.BlazeDemoFlightsPage;
+import pages.blazedemopages.BlazeDemoHomePage;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.blazedemopages.FlightInfoPage;
 import utilities.ConfigReader;
 import utilities.TestBase;
 
 public class BlazeDemoTests extends TestBase {
 
-    @Test
+    @Test(groups = {"regression","smoke"})
     public void verifyFindFlights(){
         driver.get(ConfigReader.getProperty("BlazeDemoURL"));
 
@@ -50,7 +52,24 @@ public class BlazeDemoTests extends TestBase {
         blazeDemoHomePage.chooseDestination("San Diego","Rome");
 
         BlazeDemoFlightsPage blazeDemoFlightsPage = new BlazeDemoFlightsPage();
+        String expectedAirlineNameStr = blazeDemoFlightsPage.airlineName.getText();
+        String expectedFlightNumberStr = blazeDemoFlightsPage.flightNumber.getText();
+        String expectedPriceStr = blazeDemoFlightsPage.price.getText();
         blazeDemoFlightsPage.chooseThisFlightBtn.click();
+
+        FlightInfoPage flightInfoPage = new FlightInfoPage();
+        String actualAirline = flightInfoPage.airlineName.getText();
+        String actualFlightNumber = flightInfoPage.flightNumber.getText();
+        String actualPrice = flightInfoPage.price.getText();
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(actualAirline.substring(actualAirline.indexOf(":")+2),expectedAirlineNameStr);
+        softAssert.assertEquals(actualFlightNumber,expectedFlightNumberStr);
+        softAssert.assertEquals(actualPrice,expectedPriceStr);
+
+        softAssert.assertAll();
+
 
     }
 

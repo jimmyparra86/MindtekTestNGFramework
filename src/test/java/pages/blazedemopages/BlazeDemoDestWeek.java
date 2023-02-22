@@ -1,4 +1,4 @@
-package pages;
+package pages.blazedemopages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -6,21 +6,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class FlightInfoPage {
+public class BlazeDemoDestWeek {
 
     WebDriver driver;
 
-    public FlightInfoPage(){
+    public BlazeDemoDestWeek (){
         driver = Driver.getDriver();
         PageFactory.initElements(driver,this);
     }
 
-    @FindBy (xpath = "//p[1]")
-    public WebElement airlineName;
-
-    @FindBy (xpath = "//p[2]")
-    public WebElement flightNumber;
-
-    @FindBy(xpath = "//p[3]")
-    public  WebElement price;
+    @FindBy(xpath = "//div[contains(text(),'Destination')]" )//driver.findElement(By.xpath("//div[contains(text(),'Destination')]"
+    public WebElement destinationText;
 }
