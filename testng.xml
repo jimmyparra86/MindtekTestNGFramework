@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MindtekTestNGFramework">
+    <test name="UI Automation">
+        <groups>
+            <run>
+                <include name="regression"/>
+                <exclude name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <!--This classes will be included when we run testng.xml file -->
+            <class name="tests.SauceDemoTests"/>
+            <class name="tests.BlazeDemoTests"/>
+            <class name="tests.FrameworkTest"/>
+            <class name="tests.SmartBearTests"></class>
+        </classes>
+    </test>
+
+</suite>

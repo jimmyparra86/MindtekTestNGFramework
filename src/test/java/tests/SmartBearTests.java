@@ -12,7 +12,7 @@ import utilities.TestBase;
 
 public class SmartBearTests extends TestBase {
 
-    @Test
+    @Test(groups = {"regression"})
     public void verifySmartBearLogin(){
         driver.get(ConfigReader.getProperty("SmartBearURL"));
         WebElement usernameInput =  driver.findElement(By.id("ctl00_MainContent_username"));

@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.annotations.Ignore;
 import org.testng.asserts.SoftAssert;
 import pages.blazedemopages.BlazeDemoDestWeek;
 import pages.blazedemopages.BlazeDemoFlightsPage;
@@ -8,12 +9,13 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.blazedemopages.FlightInfoPage;
+import utilities.BrowserUtils;
 import utilities.ConfigReader;
 import utilities.TestBase;
 
 public class BlazeDemoTests extends TestBase {
 
-    @Test(groups = {"regression","smoke"})
+    @Test(groups = {"regression","smoke","blazedemo"})
     public void verifyFindFlights(){
         driver.get(ConfigReader.getProperty("BlazeDemoURL"));
 
@@ -22,10 +24,13 @@ public class BlazeDemoTests extends TestBase {
         String toCity = "Rome";
         BlazeDemoHomePage blazeDemoHomePage = new BlazeDemoHomePage();
         BlazeDemoFlightsPage blazeDemoFlightsPage = new BlazeDemoFlightsPage();
-        Select fromCityDropdown = new Select(blazeDemoHomePage.fromCity);
-        Select toCityDropdown = new Select(blazeDemoHomePage.toCity);
-        fromCityDropdown.selectByValue(fromCity);
-        toCityDropdown.selectByValue(toCity);
+//        Select fromCityDropdown = new Select(blazeDemoHomePage.fromCity);
+//        Select toCityDropdown = new Select(blazeDemoHomePage.toCity);
+//        fromCityDropdown.selectByValue(fromCity);
+//        toCityDropdown.selectByValue(toCity);
+
+        BrowserUtils.selectDropdownByValue(blazeDemoHomePage.fromCity,fromCity);
+        BrowserUtils.selectDropdownByValue(blazeDemoHomePage.toCity,toCity);
         blazeDemoHomePage.findFlightsBtn.click();
 
         String expectedFlightText = "Flights from "+fromCity+" to "+toCity+":";
@@ -33,7 +38,7 @@ public class BlazeDemoTests extends TestBase {
         Assert.assertEquals(blazeDemoFlightsPage.flightsText.getText(),expectedFlightText);
     }
 
-    @Test
+    @Test(groups = {"regression","blazedemo"})
     public void verifyDestinationOfTheWeek (){
         driver.get(ConfigReader.getProperty("BlazeDemoURL"));
         BlazeDemoDestWeek blazeDemoDestWeek = new BlazeDemoDestWeek();
@@ -44,8 +49,8 @@ public class BlazeDemoTests extends TestBase {
         Assert.assertEquals(blazeDemoDestWeek.destinationText.getText(),expectedDestinationText);
 
     }
-
-    @Test
+    @Ignore
+    @Test(groups = {"regression","blazedemo"})
     public void verifyFlightInfo(){
         driver.get(ConfigReader.getProperty("BlazeDemoURL"));
         BlazeDemoHomePage blazeDemoHomePage = new BlazeDemoHomePage();

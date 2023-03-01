@@ -34,7 +34,7 @@ public class SauceDemoTests extends TestBase {
         driver.get(ConfigReader.getProperty("SauceDemoURL"));
         SauceDemoLoginPage sauceDemoLoginPage = new SauceDemoLoginPage();
 
-        sauceDemoLoginPage.username.sendKeys(ConfigReader.getProperty("standarUser"));
+        sauceDemoLoginPage.username.sendKeys(ConfigReader.getProperty("standardUser"));
         sauceDemoLoginPage.password.sendKeys(ConfigReader.getProperty("saucePassword"));
         sauceDemoLoginPage.loginBtn.click();
 
@@ -45,7 +45,7 @@ public class SauceDemoTests extends TestBase {
 
     }
 
-    @Test(groups = {"regression", "smoke", "saucedemo","login"})
+    @Test(groups = {"regression"})
     public void verifyPriceHighToLow(){
 
             driver.get(ConfigReader.getProperty("SauceDemoURL"));
